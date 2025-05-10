@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
+            $table->unsignedBigInteger('employer_id');
             $table->foreign('employer_id')->references('id')->on('employers')->onDelete('cascade');
             $table->timestamps();
         });

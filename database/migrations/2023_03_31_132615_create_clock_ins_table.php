@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('clock_ins', function (Blueprint $table) {
             $table->id();
-            table->dateTime('signed_in_at');
+            $table->dateTime('signed_in_at');
             $table->ipAddress('location');
+            $table->unsignedBigInteger('worker_id');
             $table->foreign('worker_id')->references('id')->on('workers')->onDelete('cascade');
             $table->timestamps();
         });

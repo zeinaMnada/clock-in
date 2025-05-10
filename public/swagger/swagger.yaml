@@ -1,0 +1,113 @@
+swagger: '2.0'
+info:
+  title: clock-in APIs
+  description: Worker clock-in APIs
+  version: 1.0.0
+basePath: /api/worker
+tags:
+  - name: ClockIn
+    description: Manage Woker ClockIns
+
+paths:
+  /clock-ins:
+    get:
+      tags:
+        - ClockIn
+      description: 'Fetch worker clockIns'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: worker_id
+          type: string
+          required: true  
+      responses:
+        '200':
+          description: Array list of clock-ins.
+          content:
+            application/json:
+              schema:
+                type: Array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    worker_id:
+                      type: integer
+                    signed_in_at:
+                      type: date-time
+                    latitude:
+                      type: number
+                    longitude:
+                      type: number
+                    ip_address:
+                      type: string
+                    updated_at:
+                      type: date-time
+                    created_at:
+                      type: date-time
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /clock-in:
+    post:
+      tags:
+        - ClockIn
+      description: 'Create worker clockIn'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: worker_id
+          type: integer
+          required: true
+        - in: query
+          name: timestamp
+          type: string
+          required: true
+        - in: query
+          name: latitude
+          type: number
+          required: true
+        - in: query
+          name: longitude
+          type: number
+          required: true
+      responses:
+        '201':
+          description: Created clockIn
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  worker_id:
+                    type: integer
+                  signed_in_at:
+                    type: date-time
+                  latitude:
+                    type: number
+                  longitude:
+                    type: number
+                  ip_address:
+                    type: string
+                  updated_at:
+                    type: date-time
+                  created_at:
+                    type: date-time
+        '400':
+          description: Bad request
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity
