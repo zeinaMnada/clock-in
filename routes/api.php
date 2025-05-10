@@ -14,9 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
-Route::get('worker/clock-ins', 'WorkerController@clock_ins');
-Route::post('worker/clock-in', 'WorkerController@clock_in');
+Route::get('/worker/clock-ins', 'App\Http\Controllers\Worker\ClockInController@index');
+Route::post('/worker/clock-in', 'App\Http\Controllers\Worker\ClockInController@create');

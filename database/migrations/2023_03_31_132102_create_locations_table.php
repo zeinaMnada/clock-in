@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->point('coordinates');
+            $table->unsignedBigInteger('employer_id');
             $table->foreign('employer_id')->references('id')->on('employers')->onDelete('cascade');
             $table->timestamps();
         });
